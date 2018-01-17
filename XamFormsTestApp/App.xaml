@@ -1,0 +1,70 @@
+﻿<Application
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:XamFormsTestApp.CustomRenderers;assembly=XamFormsTestApp"
+    x:Class="XamFormsTestApp.App">
+    <Application.Resources>
+        <OnPlatform x:TypeArguments="ResourceDictionary">
+            <OnPlatform.iOS>
+                <ResourceDictionary>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="#17817C" />
+                    </Style>
+                    <Style TargetType="Entry">
+                        <Setter Property="TextColor" Value="#072E35" />
+                        <Setter Property="BackgroundColor" Value="#C3DDCD" />
+                    </Style>
+                    <Style TargetType="local:ReadonlyEntry">
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="BackgroundColor" Value="#7ACAB6" />
+                    </Style>
+                    <Style TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="#072E35" />
+                        <Setter Property="TextColor" Value="#16A993" />
+                        <Setter Property="BorderRadius" Value="0" />
+                    </Style>
+                    <Style TargetType="ListView">
+                        <Setter Property="BackgroundColor" Value="#DEEEE8" />
+                    </Style>
+                    <Style x:Key="PageStyle" TargetType="ContentPage">
+                        <Setter Property="BackgroundColor" Value="#DEEEE8" />
+                    </Style>
+                </ResourceDictionary>
+            </OnPlatform.iOS>
+            <OnPlatform.Android>
+                <ResourceDictionary>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="#17817C" />
+                    </Style>
+                    <Style TargetType="Entry">
+                        <Setter Property="TextColor" Value="#072E35" />
+                        <Setter Property="BackgroundColor" Value="#C3DDCD" />
+                    </Style>
+                    <Style TargetType="local:ReadonlyEntry">
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="BackgroundColor" Value="#7ACAB6" />
+                    </Style>
+                    <Style TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="#072E35" />
+                        <Setter Property="TextColor" Value="#16A993" />
+                        <Setter Property="BorderRadius" Value="0" />
+                    </Style>
+                    <Style TargetType="ListView">
+                        <Setter Property="BackgroundColor" Value="#DEEEE8" />
+                    </Style>
+                    <Style x:Key="PageStyle" TargetType="ContentPage">
+                        <Setter Property="BackgroundColor" Value="#DEEEE8" />
+                    </Style>
+                    <Style x:Key="ServiceButton" TargetType="Button">
+                      <Setter Property="BorderRadius" Value="0"/>
+                      <Setter Property="FontSize" Value="20"/>
+                      <Setter Property="BorderWidth" Value="0"/>
+                      <Setter Property="Margin" Value="0"/>
+                      <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                      <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                    </Style>
+                </ResourceDictionary>
+            </OnPlatform.Android>
+        </OnPlatform>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding SelectedOrder.OrdName}"
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:mvvm="clr-namespace:XamFormsTestApp;assembly=XamFormsTestApp"
+             xmlns:custom="clr-namespace:XamFormsTestApp.CustomRenderers;assembly=XamFormsTestApp"
+             xmlns:convert="clr-namespace:XamFormsTestApp.Converters;assembly=XamFormsTestApp"
+             BindingContext="{Binding Source={x:Static mvvm:App.Locator}, Path=Start}"
+             Style="{StaticResource PageStyle}"
+             x:Name="OrderList"
+             x:Class="XamFormsTestApp.View.StartPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <convert:SelectedItemEventArgsConverter x:Key="SelectedltemArgsToBinding" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Text="My Orders" />
+        <ListView x:Name="ListviewOrders"
+                  Grid.Row="1" SeparatorColor="Black"
+                  ItemsSource="{Binding Orders}"
+                  VerticalOptions="Fill">
+
+
+            <ListView.Behaviors>
+                <b:EventHandlerBehavior EventName="ItemTapped">
+                    <b:InvokeCommandAction Command="{Binding SelectCommand}"
+                                           Converter="{StaticResource SelectedltemArgsToBinding}" />
+                </b:EventHandlerBehavior>
+            </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="40" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Image Source="IconOrder"
+                                   Grid.Column="0"
+                                   Grid.Row="0"
+                                   Grid.RowSpan="2" />
+                            <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"
+                                   FontAttributes="None" TextColor="Black"
+                                   LineBreakMode="TailTruncation"
+                                   Text="{Binding OrdName}">
+                                <Label.FontSize>
+                                    <OnPlatform x:TypeArguments="x:Double" iOS="14" Android="16" />
+                                </Label.FontSize>
+                            </Label>
+                            <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Start"
+                                   FontSize="12"
+                                   Text="{Binding OrdId, StringFormat='ID: {0}'}"
+                                   TextColor="Black" />
+                            <StackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" VerticalOptions="FillAndExpand"
+                                         HorizontalOptions="FillAndExpand">
+                                <custom:ToggleButton CheckedImage="CheckedOn.png" BackgroundColor="Transparent"
+                                                     UnCheckedImage="CheckedOff.png" Enabled="True"
+                                                     Command="{Binding Source={x:Reference OrderList}, Path=BindingContext.ToggleCommand}"
+                                                     CommandParameter="{Binding .}"
+                                                     Animate="True" Checked="{Binding .Favorite, Mode=TwoWay}"
+                                                     VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Grid.Row="2" Padding="10,2,10,2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button HeightRequest="36" Command="{Binding ConfirmCommand}" VerticalOptions="Start"
+                        HorizontalOptions="CenterAndExpand" Grid.Column="0" Text="Callback" />
+                <Button HeightRequest="36" Command="{Binding UpdateUiCommand}" VerticalOptions="Start"
+                        HorizontalOptions="CenterAndExpand" Grid.Column="2" Text="Update UI" />
+            </Grid>
+        </StackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:XamFormsTestApp.CustomRenderers;assembly=XamFormsTestApp"
+            xmlns:mvvm="clr-namespace:XamFormsTestApp;assembly=XamFormsTestApp"
+            BindingContext="{Binding Source={x:Static mvvm:App.Locator}, Path=Details}"
+            Title="{Binding SelectedOrder.OrdName}"
+            x:Class="XamFormsTestApp.View.DetailsPage">
+    <TabbedPage.Children>
+
+        <!--Vessel Position page-->
+        <ContentPage Title="Order" Padding="3,5,3,3" Style="{StaticResource PageStyle}">
+            <ScrollView>
+                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+                    <Grid x:Name="GridPosLayout">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Text="Last Updated" VerticalOptions="Center" />
+                        <local:ReadonlyEntry Grid.Row="0" Grid.Column="1" HeightRequest="38"
+                                             VerticalOptions="CenterAndExpand" Text="{Binding Details.LastUpdated}" />
+                        <Label Grid.Row="1" Grid.Column="0" Text="Status" VerticalOptions="Center" />
+                        <local:ReadonlyEntry Grid.Row="1" Grid.Column="1" HeightRequest="38"
+                                             VerticalOptions="CenterAndExpand" Text="{Binding Details.Status}" />
+                        <Label Grid.Row="2" Grid.Column="0" Text="Last Port" VerticalOptions="Center" />
+                        <local:ReadonlyEntry Grid.Row="2" Grid.Column="1" HeightRequest="38"
+                                             VerticalOptions="CenterAndExpand" Text="{Binding Details.From}" />
+                        <Label Grid.Row="3" Grid.Column="0" Text="Next Port" VerticalOptions="Center" />
+                        <local:ReadonlyEntry Grid.Row="3" Grid.Column="1" HeightRequest="38"
+                                             VerticalOptions="CenterAndExpand" Text="{Binding Details.To}" />
+                        <Label Grid.Row="4" Grid.Column="0" Text="Speed" VerticalOptions="Center" />
+                        <local:ReadonlyEntry Grid.Row="4" Grid.Column="1" HeightRequest="38"
+                                             VerticalOptions="CenterAndExpand" Text="{Binding Details.Speed}" />
+                        <Label Grid.Row="5" Grid.Column="0" Text="Cargo" VerticalOptions="Center" />
+                        <local:ReadonlyEntry Grid.Row="5" Grid.Column="1" HeightRequest="38"
+                                             VerticalOptions="CenterAndExpand" Text="{Binding Details.Cargo}" />
+                    </Grid>
+                    <Button HeightRequest="40"
+                            Command="{Binding ClearCommand}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            Text="Clear List in Previous Page" />
+                </StackLayout>
+            </ScrollView>
+        </ContentPage>
+
+        <!--Shipping agent page-->
+        <ContentPage Title="History" Padding="3,5,3,3" Style="{StaticResource PageStyle}">
+            <StackLayout x:Name="StackAgentLayout" Orientation="Vertical" VerticalOptions="FillAndExpand" />
+        </ContentPage>
+
+        <!--delivery page-->
+        <ContentPage Title="Delivery" Padding="3,5,3,3" Style="{StaticResource PageStyle}">
+            <ScrollView />
+        </ContentPage>
+        <!--geopos details page-->
+        <ContentPage Title="Position" Padding="3,5,3,3" Style="{StaticResource PageStyle}">
+            <ScrollView />
+        </ContentPage>
+    </TabbedPage.Children>
+</TabbedPage>
